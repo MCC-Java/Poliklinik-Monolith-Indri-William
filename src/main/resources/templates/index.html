@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Poliklinik Kampus</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <span class="navbar-brand" href="#">POLIKLINIK KAMPUS</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="">HOME</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Pendaftaran</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <div align="center">
+                <h1 style="margin-top: 25px;">Poliklinik Kampus</h1><br><br>
+                <div style="margin-bottom: 25px;" align="right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pemeriksaanModal">
+                        Pendaftaran
+                    </button>
+                </div>                
+                <table class="table" id="tablepemeriksaan">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Tanggal</th>
+                            <th>Pasien</th>
+                            <th>Nama</th>
+                            <th>Status</th>
+                            <th>Poli</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pendaftaran : ${pendaftarans}">
+                            <td th:text="${pendaftaran.no}"></td>
+                            <td th:text="${pendaftaran.tanggal}"></td>
+                            <td th:text="${pendaftaran.pasien}"></td>
+                            <td th:text="${pendaftaran.nama}"></td>
+                            <td th:text="${pendaftaran.status}"></td>
+                            <td th:text="${pendaftaran.poli}"></td>
+                            <td>
+                                <a th:href="@{ {no} (no=${pendaftaran.no})}" class="btn btn-warning">Update</a>
+                                
+                                <a th:href="@{'/delete/'+${pendaftaran.no}}"  onclick="mySwal()" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+       
+
+        <!-- New Pemeriksaan Modal -->
+        <div class="modal fade" id="pemeriksaanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Pendaftaran</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form th:action="@{/save}" th:object="${pendaftaran}" method="POST">
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label>No.</label>
+                                    <input type="text" class="form-control" id="textNo." th:field="*{no}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Tanggal</label>
+                                    <input type="text" placeholder="Masukkan Tanggal" class="form-control datepicker" th:field="*{tanggal}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Pasien</label>
+                                    <input type="text" placeholder="Masukkan ID" class="form-control" id="textPasien" th:field="*{pasien}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Nama</label>
+                                    <input type="text" placeholder="Masukkan Nama" class="form-control" id="textNama" th:field="*{nama}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Status</label>
+                                     <input type="text" placeholder="Masukkan Status" class="form-control" id="textStatus" th:field="*{status}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Poli</label>
+                                     <input type="text" placeholder="Masukkan Poliklinik" class="form-control" id="textPoli" th:field="*{poli}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input class="btn btn-success" type="submit" value="Save" onclick="mySwal1()" style="margin: 10px;">
+                        </div>
+                    </form>                            
+                </div>
+            </div>
+        </div>
+        
+         <footer class="page-footer font-small" style="display: block;">
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="mailto:immanuelirsal1@gmail.com">Indriana & William</a>
+            </div>
+        </footer>
+
+        <!--Bootstrap-->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+        <!--datatables-->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#tablepemeriksaan').DataTable();
+            });
+        </script>
+
+        <!--sweetalert-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+        function mySwal() {
+        swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        });
+       
+        </script>
+        <script>
+        function mySwal1() {
+            swal("Pendaftaran Berhasil", "success");
+        }
+        </script>
+
+        <!--datepicker-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $(".datepicker").datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true,
+                });
+            });
+        </script>
+    </body>
+</html>
+``
