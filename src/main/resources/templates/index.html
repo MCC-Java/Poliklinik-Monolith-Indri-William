@@ -1,38 +1,93 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>Poliklinik Kampus</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <span class="navbar-brand" href="#">POLIKLINIK KAMPUS</span>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<html lang="en">
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="">HOME</a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Pendaftaran</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="container">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Poliklinik Kampus</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Datepicker & DataTables-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+
+  <!-- Vendor CSS Files -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/icofont.min.css" rel="stylesheet">
+  <link href="css/boxicons.min.css" rel="stylesheet">
+  <link href="css/remixicon.css" rel="stylesheet">
+  <link href="css/venobox.css" rel="stylesheet">
+  <link href="css/owl.carousel.min.css" rel="stylesheet">
+  <link href="css/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Arsha - v2.1.0
+  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+   <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo mr-auto"><a href="home.html">POLIKLINIK KAMPUS</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="">Home</a></li>
+          <li><a href="pendaftaran">Pendaftaran</a></li>
+          <li><a href="jadwal">Jadwal</a></li>
+          
+
+        </ul>
+      </nav><!-- .nav-menu -->
+
+      
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <h1>POLIKLINIK KAMPUS</h1>
+          <h2>Aplikasi Pendaftaran Berobat di Poliklinik Kampus</h2>
+          <div class="d-lg-flex">
+            <a href="index" class="btn-get-started scrollto">DAFTAR</a>
+            <a href="jadwal" class="btn-get-started">JADWAL</a>
+            
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+          <img src="img/poliklinik.png" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <div class="container">
             <div align="center">
-                <h1 style="margin-top: 25px;">Poliklinik Kampus</h1><br><br>
+                <h1 style="margin-top: 25px;">LIST PENDAFTARAN</h1><br><br>
                 <div style="margin-bottom: 25px;" align="right">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pemeriksaanModal">
                         Pendaftaran
@@ -80,12 +135,12 @@ and open the template in the editor.
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form th:action="@{/save}" th:object="${pendaftaran}" method="POST">
+                    <form th:action="@{/pendaftaran/save}" th:object="${pendaftaran}" method="POST">
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label>No.</label>
-                                    <input type="text" class="form-control" id="textNo." th:field="*{no}" required>
+                                    <input type="text" class="form-control" id="textNo" th:field="*{no}" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label>Tanggal</label>
@@ -101,35 +156,66 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label>Status</label>
-                                     <input type="text" placeholder="Masukkan Status" class="form-control" id="textStatus" th:field="*{status}" required>
+                                     <select class="form-control" th:field="*{status}">
+                                        <option th:value="Mahasiswa" th:text="Mahasiswa"></option>
+                                        <option th:value="Dosen" th:text="Dosen"></option>
+                                        <option th:value="Pegawai" th:text="Pegawai"></option>
+                                    </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label>Poli</label>
-                                     <input type="text" placeholder="Masukkan Poliklinik" class="form-control" id="textPoli" th:field="*{poli}" required>
+                                     <select class="form-control" th:field="*{poli}">
+                                        <option th:value="Poli-Umum" th:text="Poli-Umum"></option>
+                                        <option th:value="Poli-Gigi" th:text="Poli-Gigi"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input class="btn btn-success" type="submit" value="Save" onclick="mySwal1()" style="margin: 10px;">
+                            <input class="btn btn-success" type="submit" value="Save" onclick=" mySwal1()" style="margin: 10px;">
                         </div>
                     </form>                            
                 </div>
             </div>
         </div>
-        
-         <footer class="page-footer font-small" style="display: block;">
-            <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                <a href="mailto:immanuelirsal1@gmail.com">Indriana & William</a>
-            </div>
-        </footer>
 
-        <!--Bootstrap-->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+         <!-- ======= Footer ======= -->
+  <footer id="footer">
 
-        <!--datatables-->
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Indriana&William</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+        Designed by <a href="https://bootstrapmade.com/">Indriana&William</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
+  <div id="preloader"></div>
+
+
+  <!-- Vendor JS Files -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/isotope.pkgd.min.js"></script>
+  <script src="js/venobox.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/aos.js"></script>
+  
+
+  <!-- Template Main JS File -->
+  <script src="js/main.js"></script>
+
+   <!--datatables-->
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
         <script>
             $(document).ready(function () {
@@ -148,7 +234,7 @@ and open the template in the editor.
         buttons: true,
         dangerMode: true,
         });
-       
+        }
         </script>
         <script>
         function mySwal1() {
@@ -167,6 +253,6 @@ and open the template in the editor.
                 });
             });
         </script>
-    </body>
-</html>
-``
+
+ </body>
+ </html>

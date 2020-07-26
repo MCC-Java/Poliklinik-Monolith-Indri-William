@@ -7,20 +7,25 @@ package com.mcc.poliklinik.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -40,16 +45,9 @@ import org.springframework.format.annotation.DateTimeFormat;
     , @NamedQuery(name = "Pendaftaran.findByPoli", query = "SELECT p FROM Pendaftaran p WHERE p.poli = :poli")})
 public class Pendaftaran implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "no")
-    private Integer no;
     @Basic(optional = false)
     @NotNull
     @Column(name = "tanggal")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date tanggal;
     @Basic(optional = false)
@@ -72,6 +70,15 @@ public class Pendaftaran implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "poli")
     private String poli;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "noPendaftaran", fetch = FetchType.LAZY)
+    private List<Pemeriksaan> pemeriksaanList;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "no")
+    private Integer no;
 
     public Pendaftaran() {
     }
@@ -95,6 +102,35 @@ public class Pendaftaran implements Serializable {
 
     public void setNo(Integer no) {
         this.no = no;
+    }
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (no != null ? no.hashCode() : 0);
+        return hash;
+    }
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Pendaftaran)) {
+            return false;
+        }
+        Pendaftaran other = (Pendaftaran) object;
+        if ((this.no == null && other.no != null) || (this.no != null && !this.no.equals(other.no))) {
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public String toString() {
+        return "com.mcc.poliklinik.entities.Pendaftaran[ no=" + no + " ]";
+    }
+    @XmlTransient
+    public List<Pemeriksaan> getPemeriksaanList() {
+        return pemeriksaanList;
+    }
+    public void setPemeriksaanList(List<Pemeriksaan> pemeriksaanList) {
+        this.pemeriksaanList = pemeriksaanList;
     }
 
     public Date getTanggal() {
@@ -135,31 +171,6 @@ public class Pendaftaran implements Serializable {
 
     public void setPoli(String poli) {
         this.poli = poli;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (no != null ? no.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pendaftaran)) {
-            return false;
-        }
-        Pendaftaran other = (Pendaftaran) object;
-        if ((this.no == null && other.no != null) || (this.no != null && !this.no.equals(other.no))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.mcc.poliklinik.entities.Pendaftaran[ no=" + no + " ]";
     }
     
 }

@@ -6,6 +6,7 @@
 package com.mcc.poliklinik.controller;
 
 import com.mcc.poliklinik.entities.Pendaftaran;
+import com.mcc.poliklinik.services.PemeriksaanService;
 import com.mcc.poliklinik.services.PendaftaranServices;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +27,30 @@ public class PendaftaranController {
     @Autowired
     PendaftaranServices pendaftaranServices;
     
+    @Autowired
+    PemeriksaanService pemeriksaanService;
+    
     @GetMapping("")
+    public String home() {
+    return "home";
+    }
+  
+    
+    @GetMapping("/pendaftaran")
     public String index(Model model) {
         model.addAttribute("pendaftaran", new Pendaftaran());
         model.addAttribute("pendaftarans", pendaftaranServices.getAll());
+        model.addAttribute("pemeriksaans", pemeriksaanService.getAll());
         return "index";
     }
     
-    @PostMapping("/save")
+    @PostMapping("/pendaftaran/save")
     public String save(@Valid Pendaftaran pendaftaran) {
         pendaftaranServices.save(pendaftaran);
-        return "redirect:/";
+        return "redirect:/pendaftaran";
     }
     
-    @GetMapping("{no}")
+    @GetMapping("/{no}")
     public String getById(Model model, @PathVariable("no") String no) {
         model.addAttribute("pendaftaran", pendaftaranServices.findById(Integer.parseInt(no)));
         model.addAttribute("pendaftarans", pendaftaranServices.getAll());
@@ -49,7 +60,7 @@ public class PendaftaranController {
     @GetMapping("/delete/{no}")
     public String delete(Model model, @PathVariable("no") String no) {
         pendaftaranServices.delete(Integer.parseInt(no));
-        return "redirect:/";
+        return "redirect:/pendaftaran";
     }
 }
 
