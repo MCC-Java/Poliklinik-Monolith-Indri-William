@@ -6,7 +6,9 @@
 package com.mcc.poliklinik.controller;
 
 import com.mcc.poliklinik.entities.Pemeriksaan;
+import com.mcc.poliklinik.entities.Pendaftaran;
 import com.mcc.poliklinik.services.PemeriksaanService;
+import com.mcc.poliklinik.services.PendaftaranServices;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,11 +29,16 @@ public class PemeriksaanController {
     @Autowired
     PemeriksaanService pemeriksaanService;
     
+    @Autowired
+    PendaftaranServices pendaftaranServices;
+    
    
     @GetMapping("/pemeriksaan")
     public String index(Model model) {
         model.addAttribute("pemeriksaan", new Pemeriksaan());
         model.addAttribute("pemeriksaans", pemeriksaanService.getAll());
+        model.addAttribute("pendaftaran", new Pendaftaran());
+        model.addAttribute("pendaftarans", pendaftaranServices.getAll());
         return "pemeriksaan";
     }
     

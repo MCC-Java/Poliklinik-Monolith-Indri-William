@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Poliklinik Kampus</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Datepicker & DataTables-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+
+  <!-- Vendor CSS Files -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/icofont.min.css" rel="stylesheet">
+  <link href="css/boxicons.min.css" rel="stylesheet">
+  <link href="css/remixicon.css" rel="stylesheet">
+  <link href="css/venobox.css" rel="stylesheet">
+  <link href="css/owl.carousel.min.css" rel="stylesheet">
+  <link href="css/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Arsha - v2.1.0
+  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+   <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo mr-auto"><a href="home.html">POLIKLINIK KAMPUS</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="">Home</a></li>
+          <li><a href="pendaftaran">Pendaftaran</a></li>
+          <li><a href="jadwal">Jadwal</a></li>
+          <li><a href="pemeriksaan">Pemeriksaan</a></li>
+
+        </ul>
+      </nav><!-- .nav-menu -->
+
+      
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <h1>POLIKLINIK KAMPUS</h1>
+          <h2>Aplikasi Pendaftaran Berobat di Poliklinik Kampus</h2>
+          <div class="d-lg-flex">
+            <a href="index" class="btn-get-started scrollto">DAFTAR</a>
+            <a href="jadwal" class="btn-get-started">JADWAL</a>
+            
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+          <img src="img/poliklinik.png" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <div class="container">
+            <div align="center">
+                <h1 style="margin-top: 25px;">LIST PENDAFTARAN</h1><br><br>
+                <div style="margin-bottom: 25px;" align="right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pemeriksaanModal">
+                        Pendaftaran
+                    </button>
+                </div>                
+                <table class="table" id="tablepemeriksaan">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Tanggal</th>
+                            <th>Keluhan</th>
+                            <th>No.Pendaftaran</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pemeriksaan : ${pemeriksaans}">
+                            <td th:text="${pemeriksaan.no}"></td>
+                            <td th:text="${pemeriksaan.tanggal_periksa}"></td>
+                            <td th:text="${pemeriksaan.keluhan}"></td>
+                            <td th:text="${pendaftaran.no}"></td>
+                            <td>
+                                <a th:href="@{ {no} (no=${pendaftaran.no})}" class="btn btn-warning">Update</a>
+                                
+                                <a th:href="@{'/delete/'+${pendaftaran.no}}"  onclick="mySwal()" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+       
+
+       
+       
+
+         <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Indriana&William</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+        Designed by <a href="https://bootstrapmade.com/">Indriana&William</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
+  <div id="preloader"></div>
+
+
+  <!-- Vendor JS Files -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/isotope.pkgd.min.js"></script>
+  <script src="js/venobox.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/aos.js"></script>
+  
+
+  <!-- Template Main JS File -->
+  <script src="js/main.js"></script>
+
+   <!--datatables-->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#tablepemeriksaan').DataTable();
+            });
+        </script>
+
+        <!--sweetalert-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+        function mySwal() {
+        swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        });
+        }
+        </script>
+        <script>
+        function mySwal1() {
+            swal("Pendaftaran Berhasil", "success");
+        }
+        </script>
+
+        <!--datepicker-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $(".datepicker").datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true,
+                });
+            });
+        </script>
+
+ </body>
+ </html>
